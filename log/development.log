@@ -1,0 +1,826 @@
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /workspace/config/environment.rb:5)
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-10-28 20:30:19.321013', '2024-10-28 20:30:19.321020') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateStudents (20240915233532)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "students" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "school_email" varchar, "major" varchar, "expected_graduation_date" date, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240915233532') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddIndexToStudentsSchoolEmail (20240915233724)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_students_on_school_email" ON "students" ("school_email")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240915233724') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateActiveStorageTables (20240917004753)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240917004753') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to RemoveStudentsSchoolEmail (20241017015237)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "astudents" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar DEFAULT NULL, "last_name" varchar DEFAULT NULL, "school_email" varchar DEFAULT NULL, "major" varchar DEFAULT NULL, "expected_graduation_date" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_astudents_on_school_email" ON "astudents" ("school_email")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "astudents" ("id","first_name","last_name","school_email","major","expected_graduation_date","created_at","updated_at")
+                     SELECT "id","first_name","last_name","school_email","major","expected_graduation_date","created_at","updated_at" FROM "students"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "students"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "students" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar DEFAULT NULL, "last_name" varchar DEFAULT NULL, "major" varchar DEFAULT NULL, "expected_graduation_date" date DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "students" ("id","first_name","last_name","major","expected_graduation_date","created_at","updated_at")
+                     SELECT "id","first_name","last_name","major","expected_graduation_date","created_at","updated_at" FROM "astudents"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "astudents"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241017015237') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddDeviseToStudents (20241017020608)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "students" ADD "email" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "students" ADD "encrypted_password" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "students" ADD "reset_password_token" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "students" ADD "reset_password_sent_at" datetime(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "students" ADD "remember_created_at" datetime(6)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_students_on_email" ON "students" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_students_on_reset_password_token" ON "students" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241017020608') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePortfolios (20241020221403)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "portfolios" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preferred_email" varchar, "active" boolean, "summary" text, "skills" text, "student_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_7c15c3b1d7"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_portfolios_on_student_id" ON "portfolios" ("student_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241020221403') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to UpdatePortfoliosOnDeleteCascade (20241025214145)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aportfolios" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preferred_email" varchar DEFAULT NULL, "active" boolean DEFAULT NULL, "summary" text DEFAULT NULL, "skills" text DEFAULT NULL, "student_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aportfolios_on_student_id" ON "aportfolios" ("student_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aportfolios" ("id","preferred_email","active","summary","skills","student_id","created_at","updated_at")
+                     SELECT "id","preferred_email","active","summary","skills","student_id","created_at","updated_at" FROM "portfolios"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "portfolios"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "portfolios" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preferred_email" varchar DEFAULT NULL, "active" boolean DEFAULT NULL, "summary" text DEFAULT NULL, "skills" text DEFAULT NULL, "student_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_portfolios_on_student_id" ON "portfolios" ("student_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "portfolios" ("id","preferred_email","active","summary","skills","student_id","created_at","updated_at")
+                     SELECT "id","preferred_email","active","summary","skills","student_id","created_at","updated_at" FROM "aportfolios"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aportfolios"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aportfolios" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preferred_email" varchar DEFAULT NULL, "active" boolean DEFAULT NULL, "summary" text DEFAULT NULL, "skills" text DEFAULT NULL, "student_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aportfolios_on_student_id" ON "aportfolios" ("student_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aportfolios" ("id","preferred_email","active","summary","skills","student_id","created_at","updated_at")
+                     SELECT "id","preferred_email","active","summary","skills","student_id","created_at","updated_at" FROM "portfolios"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "portfolios"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "portfolios" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preferred_email" varchar DEFAULT NULL, "active" boolean DEFAULT NULL, "summary" text DEFAULT NULL, "skills" text DEFAULT NULL, "student_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_7c15c3b1d7"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+ ON DELETE CASCADE)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_portfolios_on_student_id" ON "portfolios" ("student_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "portfolios" ("id","preferred_email","active","summary","skills","student_id","created_at","updated_at")
+                     SELECT "id","preferred_email","active","summary","skills","student_id","created_at","updated_at" FROM "aportfolios"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aportfolios"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241025214145') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /workspace/config/environment.rb:5)
+Started GET "/" for 172.17.0.1 at 2024-10-28 20:30:52 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by StudentsController#index as HTML
+Controller Search Params: #<ActionController::Parameters {} permitted: true>
+All search parameters are empty
+Filtered Students: #<ActiveRecord::Relation []>
+  Rendering layout layouts/application.html.erb
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/_search_form.html.erb (Duration: 12.0ms | Allocations: 5462)
+  Rendered students/index.html.erb within layouts/application (Duration: 17.8ms | Allocations: 6394)
+  Rendered layout layouts/application.html.erb (Duration: 384.0ms | Allocations: 86032)
+Completed 200 OK in 1948ms (Views: 394.5ms | ActiveRecord: 0.0ms | Allocations: 1072045)
+
+
+Started GET "/students/sign_up" for 172.17.0.1 at 2024-10-28 20:32:44 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Students::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering students/registrations/new.html.erb within layouts/application
+  Rendered students/shared/_error_messages.html.erb (Duration: 0.7ms | Allocations: 227)
+  Rendered students/shared/_links.html.erb (Duration: 1.8ms | Allocations: 527)
+  Rendered students/registrations/new.html.erb within layouts/application (Duration: 25.4ms | Allocations: 5110)
+  Rendered layout layouts/application.html.erb (Duration: 35.3ms | Allocations: 7335)
+Completed 200 OK in 94ms (Views: 41.0ms | ActiveRecord: 6.3ms | Allocations: 21165)
+
+
+Started POST "/students" for 172.17.0.1 at 2024-10-28 20:35:59 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Students::RegistrationsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "student"=>{"first_name"=>"Jeffery", "last_name"=>"Lane", "major"=>"Computer Science BS", "expected_graduation_date"=>"2024-10-28", "email"=>"jlane29@msudenver.edu", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (4.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "jlane29@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.3ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "Jeffery"], ["last_name", "Lane"], ["major", "Computer Science BS"], ["expected_graduation_date", "2024-10-28"], ["created_at", "2024-10-28 20:35:59.929454"], ["updated_at", "2024-10-28 20:35:59.929454"], ["email", "jlane29@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.2ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 1], ["created_at", "2024-10-28 20:35:59.954367"], ["updated_at", "2024-10-28 20:35:59.954367"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/students/1
+Completed 303 See Other in 487ms (ActiveRecord: 7.6ms | Allocations: 26442)
+
+
+Started GET "/students/1" for 172.17.0.1 at 2024-10-28 20:35:59 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/students_controller.rb:109:in `set_student'
+Students: nil
+  [1m[36mCACHE Student Load (0.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/students_controller.rb:54:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering students/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Student"], ["name", "profile_picture"], ["LIMIT", 1]]
+  ↳ app/views/students/_student.html.erb:25
+  [1m[36mPortfolio Load (0.1ms)[0m  [1m[34mSELECT "portfolios".* FROM "portfolios" WHERE "portfolios"."student_id" = ? LIMIT ?[0m  [["student_id", 1], ["LIMIT", 1]]
+  ↳ app/views/students/_student.html.erb:32
+  Rendered students/_student.html.erb (Duration: 18.0ms | Allocations: 4878)
+  Rendered students/show.html.erb within layouts/application (Duration: 23.7ms | Allocations: 5918)
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? ORDER BY "students"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:46
+  Rendered layout layouts/application.html.erb (Duration: 33.2ms | Allocations: 8791)
+Completed 200 OK in 40ms (Views: 33.6ms | ActiveRecord: 0.7ms | Allocations: 10588)
+
+
+Started DELETE "/students/sign_out" for 172.17.0.1 at 2024-10-28 20:37:59 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Students::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? ORDER BY "students"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 303 See Other in 25ms (ActiveRecord: 0.6ms | Allocations: 2715)
+
+
+Started GET "/" for 172.17.0.1 at 2024-10-28 20:37:59 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by StudentsController#index as HTML
+Controller Search Params: #<ActionController::Parameters {} permitted: true>
+All search parameters are empty
+Filtered Students: #<ActiveRecord::Relation []>
+  Rendering layout layouts/application.html.erb
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/_search_form.html.erb (Duration: 3.2ms | Allocations: 3402)
+  Rendered students/index.html.erb within layouts/application (Duration: 4.6ms | Allocations: 3658)
+  Rendered layout layouts/application.html.erb (Duration: 15.1ms | Allocations: 5827)
+Completed 200 OK in 18ms (Views: 16.7ms | ActiveRecord: 0.0ms | Allocations: 6176)
+
+
+Started GET "/students?search%5Bmajor%5D=&search%5Bdate_type%5D=&search%5Bexpected_graduation_date%5D=&commit=Show+All" for 172.17.0.1 at 2024-10-28 20:38:00 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by StudentsController#index as HTML
+  Parameters: {"search"=>{"major"=>"", "date_type"=>"", "expected_graduation_date"=>""}, "commit"=>"Show All"}
+Controller Search Params: #<ActionController::Parameters {"major"=>"", "expected_graduation_date"=>"", "date_type"=>""} permitted: true>
+show all
+  [1m[36mStudent Load (0.5ms)[0m  [1m[34mSELECT "students".* FROM "students" /* loading for inspect */ LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ app/controllers/students_controller.rb:47:in `index'
+Filtered Students: #<ActiveRecord::Relation [#<Student id: 1, first_name: "Jeffery", last_name: "Lane", major: "Computer Science BS", expected_graduation_date: "2024-10-28", created_at: "2024-10-28 20:35:59.929454000 +0000", updated_at: "2024-10-28 20:35:59.929454000 +0000", email: "jlane29@msudenver.edu">]>
+  Rendering layout layouts/application.html.erb
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/_search_form.html.erb (Duration: 2.5ms | Allocations: 3410)
+  [1m[36mStudent Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "students" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/students/index.html.erb:10
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  ↳ app/views/students/index.html.erb:23
+  Rendered students/index.html.erb within layouts/application (Duration: 9.6ms | Allocations: 4579)
+  Rendered layout layouts/application.html.erb (Duration: 17.2ms | Allocations: 6741)
+Completed 200 OK in 25ms (Views: 17.8ms | ActiveRecord: 0.8ms | Allocations: 7751)
+
+
+Started GET "/students/1" for 172.17.0.1 at 2024-10-28 20:39:42 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.6ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/students_controller.rb:109:in `set_student'
+Students: nil
+  [1m[36mCACHE Student Load (0.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/students_controller.rb:54:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering students/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Student"], ["name", "profile_picture"], ["LIMIT", 1]]
+  ↳ app/views/students/_student.html.erb:25
+  [1m[36mPortfolio Load (0.1ms)[0m  [1m[34mSELECT "portfolios".* FROM "portfolios" WHERE "portfolios"."student_id" = ? LIMIT ?[0m  [["student_id", 1], ["LIMIT", 1]]
+  ↳ app/views/students/_student.html.erb:32
+  Rendered students/_student.html.erb (Duration: 14.7ms | Allocations: 1729)
+  Rendered students/show.html.erb within layouts/application (Duration: 20.7ms | Allocations: 2154)
+  Rendered layout layouts/application.html.erb (Duration: 33.2ms | Allocations: 4196)
+Completed 200 OK in 44ms (Views: 35.0ms | ActiveRecord: 0.8ms | Allocations: 5079)
+
+
+Started DELETE "/students/1" for 172.17.0.1 at 2024-10-28 20:39:44 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"1"}
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms | Allocations: 352)
+
+
+Started GET "/students/sign_in" for 172.17.0.1 at 2024-10-28 20:39:44 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Students::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering students/sessions/new.html.erb within layouts/application
+  Rendered students/shared/_links.html.erb (Duration: 0.4ms | Allocations: 134)
+  Rendered students/sessions/new.html.erb within layouts/application (Duration: 22.2ms | Allocations: 3766)
+  Rendered layout layouts/application.html.erb (Duration: 29.0ms | Allocations: 5916)
+Completed 200 OK in 34ms (Views: 32.2ms | ActiveRecord: 0.0ms | Allocations: 6902)
+
+
+Started POST "/students/sign_in" for 172.17.0.1 at 2024-10-28 20:39:57 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Students::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "student"=>{"email"=>"jlane29@msudenver.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mStudent Load (0.3ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."email" = ? ORDER BY "students"."id" ASC LIMIT ?[0m  [["email", "jlane29@msudenver.edu"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/students/1
+Completed 303 See Other in 390ms (ActiveRecord: 0.3ms | Allocations: 2884)
+
+
+Started GET "/students/1" for 172.17.0.1 at 2024-10-28 20:39:57 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/students_controller.rb:109:in `set_student'
+Students: nil
+  [1m[36mCACHE Student Load (0.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/students_controller.rb:54:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering students/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Student"], ["name", "profile_picture"], ["LIMIT", 1]]
+  ↳ app/views/students/_student.html.erb:25
+  [1m[36mPortfolio Load (0.0ms)[0m  [1m[34mSELECT "portfolios".* FROM "portfolios" WHERE "portfolios"."student_id" = ? LIMIT ?[0m  [["student_id", 1], ["LIMIT", 1]]
+  ↳ app/views/students/_student.html.erb:32
+  Rendered students/_student.html.erb (Duration: 5.0ms | Allocations: 1740)
+  Rendered students/show.html.erb within layouts/application (Duration: 58.1ms | Allocations: 2196)
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? ORDER BY "students"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:46
+  Rendered layout layouts/application.html.erb (Duration: 64.9ms | Allocations: 4852)
+Completed 200 OK in 71ms (Views: 65.4ms | ActiveRecord: 0.3ms | Allocations: 5737)
+
+
+Started DELETE "/students/1" for 172.17.0.1 at 2024-10-28 20:40:00 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by StudentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"1"}
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? ORDER BY "students"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/students_controller.rb:109:in `set_student'
+Students: nil
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/students_controller.rb:98:in `destroy'
+  [1m[36mActiveStorage::Attachment Load (1.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Student"], ["name", "profile_picture"], ["LIMIT", 1]]
+  ↳ app/controllers/students_controller.rb:98:in `destroy'
+  [1m[36mPortfolio Load (0.1ms)[0m  [1m[34mSELECT "portfolios".* FROM "portfolios" WHERE "portfolios"."student_id" = ? LIMIT ?[0m  [["student_id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/students_controller.rb:98:in `destroy'
+  [1m[36mPortfolio Destroy (0.1ms)[0m  [1m[31mDELETE FROM "portfolios" WHERE "portfolios"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/students_controller.rb:98:in `destroy'
+  [1m[36mStudent Destroy (0.1ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/students_controller.rb:98:in `destroy'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/students_controller.rb:98:in `destroy'
+Redirected to http://localhost:3000/students
+Completed 302 Found in 19ms (ActiveRecord: 3.9ms | Allocations: 5225)
+
+
+Started GET "/students" for 172.17.0.1 at 2024-10-28 20:40:00 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by StudentsController#index as HTML
+Controller Search Params: #<ActionController::Parameters {} permitted: true>
+All search parameters are empty
+Filtered Students: #<ActiveRecord::Relation []>
+  Rendering layout layouts/application.html.erb
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/_search_form.html.erb (Duration: 2.0ms | Allocations: 3404)
+  Rendered students/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 3703)
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? ORDER BY "students"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:46
+  Rendered layout layouts/application.html.erb (Duration: 10.0ms | Allocations: 6425)
+Completed 200 OK in 12ms (Views: 10.6ms | ActiveRecord: 0.1ms | Allocations: 6772)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /workspace/config/environment.rb:5)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mStudent Load (0.7ms)[0m  [1m[34mSELECT "students".* FROM "students" ORDER BY "students"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" LEFT OUTER JOIN "active_storage_attachments" ON "active_storage_attachments"."blob_id" = "active_storage_blobs"."id" WHERE "active_storage_attachments"."id" IS NULL ORDER BY "active_storage_blobs"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  [1m[36mPortfolio Load (0.1ms)[0m  [1m[34mSELECT "portfolios".* FROM "portfolios"[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student1@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.3ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 1"], ["last_name", "Last 1"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2023-01-27"], ["created_at", "2024-10-28 20:42:09.402718"], ["updated_at", "2024-10-28 20:42:09.402718"], ["email", "student1@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.3ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 2], ["created_at", "2024-10-28 20:42:09.411250"], ["updated_at", "2024-10-28 20:42:09.411250"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.9ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student1@gmail.com"], ["active", 0], ["summary", "Et exercitationem nulla adipisci quas explicabo ex nihil quaerat vel ut molestiae eveniet sequi libero voluptatem repellendus animi amet eius."], ["skills", "et, laudantium, nam, est, exercitationem"], ["student_id", 2], ["created_at", "2024-10-28 20:42:09.625519"], ["updated_at", "2024-10-28 20:42:09.625519"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student2@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 2"], ["last_name", "Last 2"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2023-01-06"], ["created_at", "2024-10-28 20:42:09.996328"], ["updated_at", "2024-10-28 20:42:09.996328"], ["email", "student2@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 3], ["created_at", "2024-10-28 20:42:09.997799"], ["updated_at", "2024-10-28 20:42:09.997799"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student2@gmail.com"], ["active", 0], ["summary", "Explicabo aut soluta eum consequatur exercitationem doloribus occaecati sunt sunt et mollitia consectetur quo id eum neque in rerum adipisci."], ["skills", "numquam, consequatur, culpa, tempora, possimus"], ["student_id", 3], ["created_at", "2024-10-28 20:42:10.000792"], ["updated_at", "2024-10-28 20:42:10.000792"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student3@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 3"], ["last_name", "Last 3"], ["major", "Cybersecurity Major"], ["expected_graduation_date", "2024-12-02"], ["created_at", "2024-10-28 20:42:10.371406"], ["updated_at", "2024-10-28 20:42:10.371406"], ["email", "student3@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 4], ["created_at", "2024-10-28 20:42:10.373018"], ["updated_at", "2024-10-28 20:42:10.373018"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student3@gmail.com"], ["active", 0], ["summary", "Sapiente architecto quis tempore voluptates sit deleniti voluptatem illo harum dolorem ipsum dignissimos autem vel suscipit tenetur aut dolor voluptate."], ["skills", "optio, nulla, incidunt, quaerat, aliquid"], ["student_id", 4], ["created_at", "2024-10-28 20:42:10.375723"], ["updated_at", "2024-10-28 20:42:10.375723"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student4@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 4"], ["last_name", "Last 4"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2025-12-25"], ["created_at", "2024-10-28 20:42:10.744736"], ["updated_at", "2024-10-28 20:42:10.744736"], ["email", "student4@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 5], ["created_at", "2024-10-28 20:42:10.745980"], ["updated_at", "2024-10-28 20:42:10.745980"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student4@gmail.com"], ["active", 1], ["summary", "Est nobis fuga aut quo odio occaecati autem minima consequuntur quasi in sint repudiandae enim sed dolorum esse dolores et."], ["skills", "exercitationem, veniam, nesciunt, quo, soluta"], ["student_id", 5], ["created_at", "2024-10-28 20:42:10.748533"], ["updated_at", "2024-10-28 20:42:10.748533"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student5@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 5"], ["last_name", "Last 5"], ["major", "Computer Science BS"], ["expected_graduation_date", "2026-06-24"], ["created_at", "2024-10-28 20:42:11.117764"], ["updated_at", "2024-10-28 20:42:11.117764"], ["email", "student5@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 6], ["created_at", "2024-10-28 20:42:11.119156"], ["updated_at", "2024-10-28 20:42:11.119156"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.9ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student5@gmail.com"], ["active", 0], ["summary", "Est ex numquam aliquid consequatur saepe qui a repudiandae ut natus dolor assumenda ut temporibus qui eaque vitae iste autem."], ["skills", "et, distinctio, reiciendis, dolor, rerum"], ["student_id", 6], ["created_at", "2024-10-28 20:42:11.121753"], ["updated_at", "2024-10-28 20:42:11.121753"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student6@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 6"], ["last_name", "Last 6"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2023-03-28"], ["created_at", "2024-10-28 20:42:11.490780"], ["updated_at", "2024-10-28 20:42:11.490780"], ["email", "student6@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 7], ["created_at", "2024-10-28 20:42:11.492109"], ["updated_at", "2024-10-28 20:42:11.492109"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student6@gmail.com"], ["active", 0], ["summary", "Vitae est sint deserunt culpa veniam libero occaecati quidem est quae adipisci laborum quis veritatis iure iusto quis eos sed."], ["skills", "deserunt, ipsum, incidunt, ut, rerum"], ["student_id", 7], ["created_at", "2024-10-28 20:42:11.494707"], ["updated_at", "2024-10-28 20:42:11.494707"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student7@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 7"], ["last_name", "Last 7"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2025-01-29"], ["created_at", "2024-10-28 20:42:11.870976"], ["updated_at", "2024-10-28 20:42:11.870976"], ["email", "student7@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 8], ["created_at", "2024-10-28 20:42:11.872617"], ["updated_at", "2024-10-28 20:42:11.872617"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student7@gmail.com"], ["active", 1], ["summary", "Sit quidem libero ipsum ducimus id aliquid voluptatem magnam voluptates aut distinctio tenetur eos culpa dolor quaerat omnis est modi."], ["skills", "qui, nihil, dolores, eius, est"], ["student_id", 8], ["created_at", "2024-10-28 20:42:11.875081"], ["updated_at", "2024-10-28 20:42:11.875081"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student8@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 8"], ["last_name", "Last 8"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2023-07-30"], ["created_at", "2024-10-28 20:42:12.246054"], ["updated_at", "2024-10-28 20:42:12.246054"], ["email", "student8@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 9], ["created_at", "2024-10-28 20:42:12.247565"], ["updated_at", "2024-10-28 20:42:12.247565"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student8@gmail.com"], ["active", 0], ["summary", "Omnis et rerum laboriosam iste et non iusto maxime et asperiores et sed autem voluptatem voluptatum ab molestias itaque voluptas."], ["skills", "non, id, sint, doloribus, quia"], ["student_id", 9], ["created_at", "2024-10-28 20:42:12.250613"], ["updated_at", "2024-10-28 20:42:12.250613"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student9@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 9"], ["last_name", "Last 9"], ["major", "Computer Science BS"], ["expected_graduation_date", "2023-02-27"], ["created_at", "2024-10-28 20:42:12.620166"], ["updated_at", "2024-10-28 20:42:12.620166"], ["email", "student9@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 10], ["created_at", "2024-10-28 20:42:12.621486"], ["updated_at", "2024-10-28 20:42:12.621486"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (1.4ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student9@gmail.com"], ["active", 0], ["summary", "Molestiae mollitia quam ut harum atque in sunt sit laboriosam cupiditate quidem architecto nesciunt necessitatibus odit minus ut quo voluptatem."], ["skills", "laudantium, eos, rerum, sit, soluta"], ["student_id", 10], ["created_at", "2024-10-28 20:42:12.623987"], ["updated_at", "2024-10-28 20:42:12.623987"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student10@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 10"], ["last_name", "Last 10"], ["major", "Cybersecurity Major"], ["expected_graduation_date", "2023-02-21"], ["created_at", "2024-10-28 20:42:12.993496"], ["updated_at", "2024-10-28 20:42:12.993496"], ["email", "student10@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 11], ["created_at", "2024-10-28 20:42:12.994903"], ["updated_at", "2024-10-28 20:42:12.994903"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student10@gmail.com"], ["active", 1], ["summary", "Sapiente maiores praesentium asperiores voluptatibus facilis iure et doloremque veniam voluptates ea dicta similique corporis omnis veritatis aliquam quis ut."], ["skills", "sit, magnam, rem, cupiditate, quaerat"], ["student_id", 11], ["created_at", "2024-10-28 20:42:12.998124"], ["updated_at", "2024-10-28 20:42:12.998124"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student11@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 11"], ["last_name", "Last 11"], ["major", "Cybersecurity Major"], ["expected_graduation_date", "2026-05-07"], ["created_at", "2024-10-28 20:42:13.368002"], ["updated_at", "2024-10-28 20:42:13.368002"], ["email", "student11@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 12], ["created_at", "2024-10-28 20:42:13.369507"], ["updated_at", "2024-10-28 20:42:13.369507"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student11@gmail.com"], ["active", 1], ["summary", "Maiores optio quis dolore eos assumenda deserunt fuga maxime reiciendis dolor ut expedita excepturi suscipit ut quia at sint aspernatur."], ["skills", "et, quam, quo, pariatur, consequatur"], ["student_id", 12], ["created_at", "2024-10-28 20:42:13.372060"], ["updated_at", "2024-10-28 20:42:13.372060"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student12@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 12"], ["last_name", "Last 12"], ["major", "Cybersecurity Major"], ["expected_graduation_date", "2024-03-12"], ["created_at", "2024-10-28 20:42:13.741959"], ["updated_at", "2024-10-28 20:42:13.741959"], ["email", "student12@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 13], ["created_at", "2024-10-28 20:42:13.743367"], ["updated_at", "2024-10-28 20:42:13.743367"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student12@gmail.com"], ["active", 0], ["summary", "Odit labore cum ab reiciendis occaecati explicabo earum officiis qui itaque enim optio ad est est dignissimos quis tenetur dolorum."], ["skills", "sint, modi, facere, ut, quis"], ["student_id", 13], ["created_at", "2024-10-28 20:42:13.746066"], ["updated_at", "2024-10-28 20:42:13.746066"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student13@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 13"], ["last_name", "Last 13"], ["major", "Cybersecurity Major"], ["expected_graduation_date", "2024-06-04"], ["created_at", "2024-10-28 20:42:14.118309"], ["updated_at", "2024-10-28 20:42:14.118309"], ["email", "student13@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 14], ["created_at", "2024-10-28 20:42:14.119853"], ["updated_at", "2024-10-28 20:42:14.119853"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student13@gmail.com"], ["active", 0], ["summary", "Sit eveniet quia consequatur molestias et illo consequuntur eligendi commodi dolores qui aut unde fugit harum in repudiandae vero voluptate."], ["skills", "quam, et, repellat, cupiditate, voluptas"], ["student_id", 14], ["created_at", "2024-10-28 20:42:14.122816"], ["updated_at", "2024-10-28 20:42:14.122816"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student14@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 14"], ["last_name", "Last 14"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2026-07-04"], ["created_at", "2024-10-28 20:42:14.495086"], ["updated_at", "2024-10-28 20:42:14.495086"], ["email", "student14@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 15], ["created_at", "2024-10-28 20:42:14.496630"], ["updated_at", "2024-10-28 20:42:14.496630"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (1.5ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student14@gmail.com"], ["active", 1], ["summary", "Similique quo tenetur recusandae ea vitae quia quia in reiciendis ad quidem sit ex voluptatem numquam ut aperiam quo labore."], ["skills", "dolorum, et, quidem, asperiores, rerum"], ["student_id", 15], ["created_at", "2024-10-28 20:42:14.499578"], ["updated_at", "2024-10-28 20:42:14.499578"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student15@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 15"], ["last_name", "Last 15"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2025-04-24"], ["created_at", "2024-10-28 20:42:14.870259"], ["updated_at", "2024-10-28 20:42:14.870259"], ["email", "student15@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 16], ["created_at", "2024-10-28 20:42:14.871618"], ["updated_at", "2024-10-28 20:42:14.871618"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student15@gmail.com"], ["active", 1], ["summary", "Accusantium voluptates cupiditate est facere enim sunt in eos labore officiis quos ratione itaque sed quae pariatur quisquam asperiores assumenda."], ["skills", "omnis, officia, fuga, omnis, ut"], ["student_id", 16], ["created_at", "2024-10-28 20:42:14.874947"], ["updated_at", "2024-10-28 20:42:14.874947"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student16@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 16"], ["last_name", "Last 16"], ["major", "Cybersecurity Major"], ["expected_graduation_date", "2025-01-25"], ["created_at", "2024-10-28 20:42:15.244858"], ["updated_at", "2024-10-28 20:42:15.244858"], ["email", "student16@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.2ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 17], ["created_at", "2024-10-28 20:42:15.246755"], ["updated_at", "2024-10-28 20:42:15.246755"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student16@gmail.com"], ["active", 0], ["summary", "Non vitae id esse porro repellendus distinctio sit aut molestiae voluptatem sit nesciunt et nisi consequatur enim ut quia eum."], ["skills", "officia, eum, in, placeat, sit"], ["student_id", 17], ["created_at", "2024-10-28 20:42:15.249547"], ["updated_at", "2024-10-28 20:42:15.249547"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student17@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 17"], ["last_name", "Last 17"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2026-04-14"], ["created_at", "2024-10-28 20:42:15.619951"], ["updated_at", "2024-10-28 20:42:15.619951"], ["email", "student17@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 18], ["created_at", "2024-10-28 20:42:15.621366"], ["updated_at", "2024-10-28 20:42:15.621366"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student17@gmail.com"], ["active", 0], ["summary", "Rerum perferendis inventore occaecati nisi quos omnis placeat fuga laborum quis tempore fugiat delectus sed sit aperiam culpa unde consequuntur."], ["skills", "non, quasi, et, aut, est"], ["student_id", 18], ["created_at", "2024-10-28 20:42:15.624178"], ["updated_at", "2024-10-28 20:42:15.624178"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student18@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 18"], ["last_name", "Last 18"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2025-10-11"], ["created_at", "2024-10-28 20:42:15.993893"], ["updated_at", "2024-10-28 20:42:15.993893"], ["email", "student18@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 19], ["created_at", "2024-10-28 20:42:15.995128"], ["updated_at", "2024-10-28 20:42:15.995128"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student18@gmail.com"], ["active", 0], ["summary", "Et quia molestias non et consequatur tenetur ullam nobis voluptate ut debitis aut sequi laudantium similique exercitationem et dolorum qui."], ["skills", "rerum, nihil, nemo, asperiores, quaerat"], ["student_id", 19], ["created_at", "2024-10-28 20:42:15.997679"], ["updated_at", "2024-10-28 20:42:15.997679"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student19@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 19"], ["last_name", "Last 19"], ["major", "Computer Science BS"], ["expected_graduation_date", "2025-11-27"], ["created_at", "2024-10-28 20:42:16.370083"], ["updated_at", "2024-10-28 20:42:16.370083"], ["email", "student19@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 20], ["created_at", "2024-10-28 20:42:16.371629"], ["updated_at", "2024-10-28 20:42:16.371629"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.9ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student19@gmail.com"], ["active", 0], ["summary", "Maiores commodi voluptates et ut officiis fugit recusandae vel necessitatibus enim culpa et dignissimos totam distinctio aspernatur error unde doloribus."], ["skills", "et, placeat, natus, quidem, velit"], ["student_id", 20], ["created_at", "2024-10-28 20:42:16.375172"], ["updated_at", "2024-10-28 20:42:16.375172"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student20@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 20"], ["last_name", "Last 20"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2025-06-29"], ["created_at", "2024-10-28 20:42:16.744219"], ["updated_at", "2024-10-28 20:42:16.744219"], ["email", "student20@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 21], ["created_at", "2024-10-28 20:42:16.745486"], ["updated_at", "2024-10-28 20:42:16.745486"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student20@gmail.com"], ["active", 0], ["summary", "Adipisci sint beatae maxime quo laudantium inventore fugit dignissimos ducimus nesciunt praesentium ut qui sint doloremque eos recusandae non occaecati."], ["skills", "aut, ea, commodi, numquam, doloremque"], ["student_id", 21], ["created_at", "2024-10-28 20:42:16.749423"], ["updated_at", "2024-10-28 20:42:16.749423"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student21@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 21"], ["last_name", "Last 21"], ["major", "Computer Science BS"], ["expected_graduation_date", "2026-07-06"], ["created_at", "2024-10-28 20:42:17.118563"], ["updated_at", "2024-10-28 20:42:17.118563"], ["email", "student21@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.2ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 22], ["created_at", "2024-10-28 20:42:17.120551"], ["updated_at", "2024-10-28 20:42:17.120551"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student21@gmail.com"], ["active", 1], ["summary", "Quasi voluptatem dolorum quibusdam hic mollitia aut labore optio at modi voluptate sapiente ex ut delectus amet debitis omnis quo."], ["skills", "minima, reprehenderit, quae, commodi, accusamus"], ["student_id", 22], ["created_at", "2024-10-28 20:42:17.123310"], ["updated_at", "2024-10-28 20:42:17.123310"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student22@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 22"], ["last_name", "Last 22"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2024-03-14"], ["created_at", "2024-10-28 20:42:17.492758"], ["updated_at", "2024-10-28 20:42:17.492758"], ["email", "student22@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 23], ["created_at", "2024-10-28 20:42:17.494001"], ["updated_at", "2024-10-28 20:42:17.494001"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student22@gmail.com"], ["active", 0], ["summary", "Ad eos molestiae itaque reiciendis illo provident debitis quia corrupti non eius laudantium voluptatum ut rerum dolorem commodi id qui."], ["skills", "voluptate, nam, quia, laborum, nulla"], ["student_id", 23], ["created_at", "2024-10-28 20:42:17.496640"], ["updated_at", "2024-10-28 20:42:17.496640"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student23@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 23"], ["last_name", "Last 23"], ["major", "Computer Science BS"], ["expected_graduation_date", "2025-01-03"], ["created_at", "2024-10-28 20:42:17.865947"], ["updated_at", "2024-10-28 20:42:17.865947"], ["email", "student23@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 24], ["created_at", "2024-10-28 20:42:17.867196"], ["updated_at", "2024-10-28 20:42:17.867196"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student23@gmail.com"], ["active", 1], ["summary", "Voluptatem doloribus reprehenderit quisquam et iusto eveniet placeat nemo in quia sint non mollitia facilis veniam rerum numquam nam in."], ["skills", "illo, et, aut, aperiam, accusantium"], ["student_id", 24], ["created_at", "2024-10-28 20:42:17.869685"], ["updated_at", "2024-10-28 20:42:17.869685"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student24@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 24"], ["last_name", "Last 24"], ["major", "Cybersecurity Major"], ["expected_graduation_date", "2022-11-17"], ["created_at", "2024-10-28 20:42:18.239424"], ["updated_at", "2024-10-28 20:42:18.239424"], ["email", "student24@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 25], ["created_at", "2024-10-28 20:42:18.240968"], ["updated_at", "2024-10-28 20:42:18.240968"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student24@gmail.com"], ["active", 1], ["summary", "Corrupti dolorem sed odit saepe eius amet ab nesciunt laboriosam quae aliquid ducimus officia ipsum et incidunt et asperiores nobis."], ["skills", "ut, officia, asperiores, velit, praesentium"], ["student_id", 25], ["created_at", "2024-10-28 20:42:18.245035"], ["updated_at", "2024-10-28 20:42:18.245035"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student25@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 25"], ["last_name", "Last 25"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2023-06-15"], ["created_at", "2024-10-28 20:42:18.614748"], ["updated_at", "2024-10-28 20:42:18.614748"], ["email", "student25@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.2ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 26], ["created_at", "2024-10-28 20:42:18.616681"], ["updated_at", "2024-10-28 20:42:18.616681"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student25@gmail.com"], ["active", 1], ["summary", "Omnis quaerat magni aut inventore laborum nostrum maxime sed voluptas consectetur eaque perspiciatis ut facilis pariatur ut dolorem quod quo."], ["skills", "dicta, modi, similique, suscipit, mollitia"], ["student_id", 26], ["created_at", "2024-10-28 20:42:18.619483"], ["updated_at", "2024-10-28 20:42:18.619483"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student26@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 26"], ["last_name", "Last 26"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2024-09-23"], ["created_at", "2024-10-28 20:42:18.989323"], ["updated_at", "2024-10-28 20:42:18.989323"], ["email", "student26@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 27], ["created_at", "2024-10-28 20:42:18.990748"], ["updated_at", "2024-10-28 20:42:18.990748"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student26@gmail.com"], ["active", 0], ["summary", "Rerum unde nesciunt ipsam ipsum qui molestiae fuga ut odit qui voluptatem odio autem nam et in culpa aut repudiandae."], ["skills", "est, quisquam, itaque, sed, libero"], ["student_id", 27], ["created_at", "2024-10-28 20:42:18.993254"], ["updated_at", "2024-10-28 20:42:18.993254"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student27@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 27"], ["last_name", "Last 27"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2022-12-30"], ["created_at", "2024-10-28 20:42:19.363783"], ["updated_at", "2024-10-28 20:42:19.363783"], ["email", "student27@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 28], ["created_at", "2024-10-28 20:42:19.365272"], ["updated_at", "2024-10-28 20:42:19.365272"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student27@gmail.com"], ["active", 1], ["summary", "Dolorem illum ipsum et rerum voluptate itaque et neque quis aut et sit porro ducimus possimus corrupti quaerat dicta molestias."], ["skills", "vero, dolor, totam, cupiditate, nesciunt"], ["student_id", 28], ["created_at", "2024-10-28 20:42:19.368017"], ["updated_at", "2024-10-28 20:42:19.368017"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student28@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 28"], ["last_name", "Last 28"], ["major", "Cybersecurity Major"], ["expected_graduation_date", "2026-10-13"], ["created_at", "2024-10-28 20:42:19.738225"], ["updated_at", "2024-10-28 20:42:19.738225"], ["email", "student28@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 29], ["created_at", "2024-10-28 20:42:19.739561"], ["updated_at", "2024-10-28 20:42:19.739561"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student28@gmail.com"], ["active", 1], ["summary", "Aut ipsam mollitia soluta repellendus qui exercitationem odio laudantium sed voluptatibus et autem fugiat nisi excepturi et in eveniet voluptatem."], ["skills", "rerum, sed, ut, aliquam, illo"], ["student_id", 29], ["created_at", "2024-10-28 20:42:19.742281"], ["updated_at", "2024-10-28 20:42:19.742281"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student29@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 29"], ["last_name", "Last 29"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2024-10-08"], ["created_at", "2024-10-28 20:42:20.112364"], ["updated_at", "2024-10-28 20:42:20.112364"], ["email", "student29@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 30], ["created_at", "2024-10-28 20:42:20.113702"], ["updated_at", "2024-10-28 20:42:20.113702"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student29@gmail.com"], ["active", 0], ["summary", "Ipsum sit libero sit asperiores ut minus aut architecto harum excepturi nobis adipisci ducimus sed molestias et quasi qui voluptatem."], ["skills", "minima, laborum, iste, in, sunt"], ["student_id", 30], ["created_at", "2024-10-28 20:42:20.116356"], ["updated_at", "2024-10-28 20:42:20.116356"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student30@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.3ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 30"], ["last_name", "Last 30"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2025-06-01"], ["created_at", "2024-10-28 20:42:20.487853"], ["updated_at", "2024-10-28 20:42:20.487853"], ["email", "student30@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 31], ["created_at", "2024-10-28 20:42:20.489612"], ["updated_at", "2024-10-28 20:42:20.489612"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student30@gmail.com"], ["active", 0], ["summary", "Sunt facilis dolores sit sed tempore aut quae consequatur voluptatum est sapiente dolorum repellendus eligendi iure fugit nam officia aperiam."], ["skills", "est, velit, vero, maxime, veniam"], ["student_id", 31], ["created_at", "2024-10-28 20:42:20.492376"], ["updated_at", "2024-10-28 20:42:20.492376"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student31@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 31"], ["last_name", "Last 31"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2023-05-25"], ["created_at", "2024-10-28 20:42:20.862870"], ["updated_at", "2024-10-28 20:42:20.862870"], ["email", "student31@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 32], ["created_at", "2024-10-28 20:42:20.864253"], ["updated_at", "2024-10-28 20:42:20.864253"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student31@gmail.com"], ["active", 1], ["summary", "Est exercitationem saepe distinctio est qui voluptatem vel repellat tenetur nihil tempore veritatis consequatur quis repellendus nam nostrum sunt quibusdam."], ["skills", "velit, et, inventore, et, aut"], ["student_id", 32], ["created_at", "2024-10-28 20:42:20.866940"], ["updated_at", "2024-10-28 20:42:20.866940"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student32@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 32"], ["last_name", "Last 32"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2025-08-01"], ["created_at", "2024-10-28 20:42:21.237315"], ["updated_at", "2024-10-28 20:42:21.237315"], ["email", "student32@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 33], ["created_at", "2024-10-28 20:42:21.238709"], ["updated_at", "2024-10-28 20:42:21.238709"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.9ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student32@gmail.com"], ["active", 1], ["summary", "Et esse et voluptatum atque nesciunt quos in enim quo deleniti eius ab molestiae illum ut quo est totam distinctio."], ["skills", "est, qui, mollitia, facilis, veritatis"], ["student_id", 33], ["created_at", "2024-10-28 20:42:21.241297"], ["updated_at", "2024-10-28 20:42:21.241297"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student33@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 33"], ["last_name", "Last 33"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2025-03-31"], ["created_at", "2024-10-28 20:42:21.611526"], ["updated_at", "2024-10-28 20:42:21.611526"], ["email", "student33@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 34], ["created_at", "2024-10-28 20:42:21.612820"], ["updated_at", "2024-10-28 20:42:21.612820"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student33@gmail.com"], ["active", 0], ["summary", "Neque sit consequatur cumque vel maiores ullam accusamus minima aut enim iure ipsam doloribus pariatur nihil aperiam tempora laboriosam voluptatum."], ["skills", "odio, ut, excepturi, officiis, nulla"], ["student_id", 34], ["created_at", "2024-10-28 20:42:21.616193"], ["updated_at", "2024-10-28 20:42:21.616193"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student34@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 34"], ["last_name", "Last 34"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2026-06-07"], ["created_at", "2024-10-28 20:42:21.986256"], ["updated_at", "2024-10-28 20:42:21.986256"], ["email", "student34@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 35], ["created_at", "2024-10-28 20:42:21.987745"], ["updated_at", "2024-10-28 20:42:21.987745"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student34@gmail.com"], ["active", 1], ["summary", "Quia occaecati qui illum sequi doloribus officiis deleniti consectetur culpa dolor aperiam iusto laboriosam laudantium vitae est in velit sed."], ["skills", "minima, sunt, nihil, consequuntur, debitis"], ["student_id", 35], ["created_at", "2024-10-28 20:42:21.990338"], ["updated_at", "2024-10-28 20:42:21.990338"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student35@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 35"], ["last_name", "Last 35"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2023-10-31"], ["created_at", "2024-10-28 20:42:22.360123"], ["updated_at", "2024-10-28 20:42:22.360123"], ["email", "student35@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 36], ["created_at", "2024-10-28 20:42:22.361633"], ["updated_at", "2024-10-28 20:42:22.361633"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student35@gmail.com"], ["active", 0], ["summary", "Rerum temporibus corrupti quaerat aperiam laboriosam unde necessitatibus ad rerum fugiat eos voluptatem consequatur et error dignissimos ea voluptatem excepturi."], ["skills", "cumque, laborum, quia, est, eos"], ["student_id", 36], ["created_at", "2024-10-28 20:42:22.364056"], ["updated_at", "2024-10-28 20:42:22.364056"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student36@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 36"], ["last_name", "Last 36"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2023-12-03"], ["created_at", "2024-10-28 20:42:22.734244"], ["updated_at", "2024-10-28 20:42:22.734244"], ["email", "student36@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 37], ["created_at", "2024-10-28 20:42:22.735541"], ["updated_at", "2024-10-28 20:42:22.735541"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student36@gmail.com"], ["active", 1], ["summary", "Et sed dolorum quo omnis voluptas quam fuga ut rerum beatae ad iure reprehenderit aut dignissimos maxime non vel ut."], ["skills", "recusandae, quia, laborum, velit, velit"], ["student_id", 37], ["created_at", "2024-10-28 20:42:22.738120"], ["updated_at", "2024-10-28 20:42:22.738120"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student37@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 37"], ["last_name", "Last 37"], ["major", "Cybersecurity Major"], ["expected_graduation_date", "2025-08-30"], ["created_at", "2024-10-28 20:42:23.110624"], ["updated_at", "2024-10-28 20:42:23.110624"], ["email", "student37@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 38], ["created_at", "2024-10-28 20:42:23.111972"], ["updated_at", "2024-10-28 20:42:23.111972"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (1.5ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student37@gmail.com"], ["active", 0], ["summary", "Omnis quibusdam nemo molestiae iure in officia porro sed maiores dolor quo dolores modi quis ut alias saepe sed ducimus."], ["skills", "ipsa, ut, amet, fuga, voluptatem"], ["student_id", 38], ["created_at", "2024-10-28 20:42:23.114616"], ["updated_at", "2024-10-28 20:42:23.114616"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student38@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 38"], ["last_name", "Last 38"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2024-09-18"], ["created_at", "2024-10-28 20:42:23.485915"], ["updated_at", "2024-10-28 20:42:23.485915"], ["email", "student38@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 39], ["created_at", "2024-10-28 20:42:23.487360"], ["updated_at", "2024-10-28 20:42:23.487360"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student38@gmail.com"], ["active", 0], ["summary", "Ipsam fugiat corrupti praesentium eaque qui aspernatur enim ipsum asperiores atque et minus laborum velit sit et nisi quam fuga."], ["skills", "qui, perferendis, eos, delectus, voluptatem"], ["student_id", 39], ["created_at", "2024-10-28 20:42:23.490712"], ["updated_at", "2024-10-28 20:42:23.490712"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student39@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 39"], ["last_name", "Last 39"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2023-12-04"], ["created_at", "2024-10-28 20:42:23.859300"], ["updated_at", "2024-10-28 20:42:23.859300"], ["email", "student39@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.2ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 40], ["created_at", "2024-10-28 20:42:23.861109"], ["updated_at", "2024-10-28 20:42:23.861109"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student39@gmail.com"], ["active", 0], ["summary", "Rerum distinctio eos voluptatem ipsam voluptates ullam sapiente velit praesentium sint veniam molestiae id necessitatibus laborum et eum doloribus veritatis."], ["skills", "mollitia, aut, est, voluptatem, dolorum"], ["student_id", 40], ["created_at", "2024-10-28 20:42:23.864023"], ["updated_at", "2024-10-28 20:42:23.864023"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student40@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 40"], ["last_name", "Last 40"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2026-02-16"], ["created_at", "2024-10-28 20:42:24.233087"], ["updated_at", "2024-10-28 20:42:24.233087"], ["email", "student40@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 41], ["created_at", "2024-10-28 20:42:24.234312"], ["updated_at", "2024-10-28 20:42:24.234312"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student40@gmail.com"], ["active", 0], ["summary", "Consequatur animi illo qui reprehenderit fuga dolorem voluptatum qui non sapiente ipsa accusantium tenetur nihil laboriosam rerum est voluptatem ut."], ["skills", "explicabo, quae, ut, ut, ad"], ["student_id", 41], ["created_at", "2024-10-28 20:42:24.236828"], ["updated_at", "2024-10-28 20:42:24.236828"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student41@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 41"], ["last_name", "Last 41"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2026-03-25"], ["created_at", "2024-10-28 20:42:24.608064"], ["updated_at", "2024-10-28 20:42:24.608064"], ["email", "student41@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 42], ["created_at", "2024-10-28 20:42:24.609890"], ["updated_at", "2024-10-28 20:42:24.609890"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student41@gmail.com"], ["active", 0], ["summary", "Quasi sed magnam eum fugiat ut repellat consequatur aut et esse non maiores corporis aspernatur exercitationem rerum voluptatem molestias eligendi."], ["skills", "et, animi, rerum, tempore, est"], ["student_id", 42], ["created_at", "2024-10-28 20:42:24.612978"], ["updated_at", "2024-10-28 20:42:24.612978"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student42@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 42"], ["last_name", "Last 42"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2023-05-30"], ["created_at", "2024-10-28 20:42:24.984420"], ["updated_at", "2024-10-28 20:42:24.984420"], ["email", "student42@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 43], ["created_at", "2024-10-28 20:42:24.985909"], ["updated_at", "2024-10-28 20:42:24.985909"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.9ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student42@gmail.com"], ["active", 1], ["summary", "Voluptatem provident odit et delectus totam voluptas a incidunt soluta ut reiciendis dicta et adipisci velit voluptatem quia commodi autem."], ["skills", "iure, fugit, illo, aut, cum"], ["student_id", 43], ["created_at", "2024-10-28 20:42:24.989339"], ["updated_at", "2024-10-28 20:42:24.989339"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student43@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 43"], ["last_name", "Last 43"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2024-08-05"], ["created_at", "2024-10-28 20:42:25.359247"], ["updated_at", "2024-10-28 20:42:25.359247"], ["email", "student43@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 44], ["created_at", "2024-10-28 20:42:25.360621"], ["updated_at", "2024-10-28 20:42:25.360621"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student43@gmail.com"], ["active", 1], ["summary", "Molestias enim nihil eaque esse ipsam itaque ex velit est consectetur hic voluptatem et facere provident quos pariatur ipsa doloremque."], ["skills", "consequatur, rerum, assumenda, nobis, nihil"], ["student_id", 44], ["created_at", "2024-10-28 20:42:25.364218"], ["updated_at", "2024-10-28 20:42:25.364218"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student44@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.2ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 44"], ["last_name", "Last 44"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2023-11-09"], ["created_at", "2024-10-28 20:42:25.733981"], ["updated_at", "2024-10-28 20:42:25.733981"], ["email", "student44@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 45], ["created_at", "2024-10-28 20:42:25.736082"], ["updated_at", "2024-10-28 20:42:25.736082"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student44@gmail.com"], ["active", 1], ["summary", "Earum sit dignissimos voluptatem est ab reiciendis voluptas maiores et minima laborum optio tempore vero et sed totam odit ea."], ["skills", "quas, debitis, vel, illum, perferendis"], ["student_id", 45], ["created_at", "2024-10-28 20:42:25.738792"], ["updated_at", "2024-10-28 20:42:25.738792"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student45@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 45"], ["last_name", "Last 45"], ["major", "Computer Science BS"], ["expected_graduation_date", "2026-05-19"], ["created_at", "2024-10-28 20:42:26.109491"], ["updated_at", "2024-10-28 20:42:26.109491"], ["email", "student45@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 46], ["created_at", "2024-10-28 20:42:26.110735"], ["updated_at", "2024-10-28 20:42:26.110735"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student45@gmail.com"], ["active", 0], ["summary", "Excepturi labore eaque est suscipit inventore placeat quas quia ullam molestiae enim eum in omnis quo non eveniet tempore ipsam."], ["skills", "autem, blanditiis, error, laboriosam, delectus"], ["student_id", 46], ["created_at", "2024-10-28 20:42:26.113146"], ["updated_at", "2024-10-28 20:42:26.113146"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student46@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 46"], ["last_name", "Last 46"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2023-02-10"], ["created_at", "2024-10-28 20:42:26.484130"], ["updated_at", "2024-10-28 20:42:26.484130"], ["email", "student46@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 47], ["created_at", "2024-10-28 20:42:26.485803"], ["updated_at", "2024-10-28 20:42:26.485803"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student46@gmail.com"], ["active", 0], ["summary", "Repellat labore qui ut deserunt nulla distinctio sequi quia eveniet omnis odio tenetur eos rerum est corrupti quos non laboriosam."], ["skills", "nesciunt, qui, et, aspernatur, expedita"], ["student_id", 47], ["created_at", "2024-10-28 20:42:26.488974"], ["updated_at", "2024-10-28 20:42:26.488974"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student47@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 47"], ["last_name", "Last 47"], ["major", "Computer Engineering BS"], ["expected_graduation_date", "2024-09-15"], ["created_at", "2024-10-28 20:42:26.858930"], ["updated_at", "2024-10-28 20:42:26.858930"], ["email", "student47@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 48], ["created_at", "2024-10-28 20:42:26.860164"], ["updated_at", "2024-10-28 20:42:26.860164"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student47@gmail.com"], ["active", 1], ["summary", "Vel quae placeat iste cum ut alias sed sint accusamus est omnis eveniet reprehenderit molestiae harum voluptas qui exercitationem nobis."], ["skills", "consequatur, architecto, a, et, vel"], ["student_id", 48], ["created_at", "2024-10-28 20:42:26.864138"], ["updated_at", "2024-10-28 20:42:26.864138"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student48@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 48"], ["last_name", "Last 48"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2025-05-07"], ["created_at", "2024-10-28 20:42:27.234119"], ["updated_at", "2024-10-28 20:42:27.234119"], ["email", "student48@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.2ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 49], ["created_at", "2024-10-28 20:42:27.236013"], ["updated_at", "2024-10-28 20:42:27.236013"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.7ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student48@gmail.com"], ["active", 1], ["summary", "Omnis non aut corrupti porro quia aliquid rerum eum eius delectus repellendus sed atque ut expedita quis nesciunt aut velit."], ["skills", "sequi, sunt, ipsum, nesciunt, commodi"], ["student_id", 49], ["created_at", "2024-10-28 20:42:27.238758"], ["updated_at", "2024-10-28 20:42:27.238758"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student49@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 49"], ["last_name", "Last 49"], ["major", "Computer Information Systems BS"], ["expected_graduation_date", "2022-12-22"], ["created_at", "2024-10-28 20:42:27.609648"], ["updated_at", "2024-10-28 20:42:27.609648"], ["email", "student49@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 50], ["created_at", "2024-10-28 20:42:27.610946"], ["updated_at", "2024-10-28 20:42:27.610946"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (0.8ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student49@gmail.com"], ["active", 1], ["summary", "Est error eum nisi et pariatur quia eos voluptas dicta qui autem id iure dolor iste laudantium voluptatem voluptatum ea."], ["skills", "impedit, tempora, qui, enim, numquam"], ["student_id", 50], ["created_at", "2024-10-28 20:42:27.613604"], ["updated_at", "2024-10-28 20:42:27.613604"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "student50@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "First 50"], ["last_name", "Last 50"], ["major", "Data Science and Machine Learning Major"], ["expected_graduation_date", "2026-02-12"], ["created_at", "2024-10-28 20:42:27.984651"], ["updated_at", "2024-10-28 20:42:27.984651"], ["email", "student50@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 51], ["created_at", "2024-10-28 20:42:27.986007"], ["updated_at", "2024-10-28 20:42:27.986007"]]
+  ↳ app/models/student.rb:37:in `create_portfolio'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Create (1.3ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", "student50@gmail.com"], ["active", 1], ["summary", "A natus velit quod soluta ut alias facere illum et minus accusamus voluptatem iure corporis eius ratione esse saepe sint."], ["skills", "ea, a, temporibus, excepturi, sequi"], ["student_id", 51], ["created_at", "2024-10-28 20:42:27.988677"], ["updated_at", "2024-10-28 20:42:27.988677"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /workspace/config/environment.rb:5)
+Started GET "/students" for 172.17.0.1 at 2024-10-28 20:42:50 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by StudentsController#index as HTML
+Controller Search Params: #<ActionController::Parameters {} permitted: true>
+All search parameters are empty
+Filtered Students: #<ActiveRecord::Relation []>
+  Rendering layout layouts/application.html.erb
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/_search_form.html.erb (Duration: 4.5ms | Allocations: 4613)
+  Rendered students/index.html.erb within layouts/application (Duration: 13.9ms | Allocations: 6722)
+  Rendered layout layouts/application.html.erb (Duration: 77.1ms | Allocations: 27800)
+Completed 200 OK in 362ms (Views: 81.5ms | ActiveRecord: 0.0ms | Allocations: 315851)
+
+
+Started GET "/students?search%5Bmajor%5D=&search%5Bdate_type%5D=&search%5Bexpected_graduation_date%5D=&commit=Show+All" for 172.17.0.1 at 2024-10-28 20:42:51 +0000
+Cannot render console from 172.17.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by StudentsController#index as HTML
+  Parameters: {"search"=>{"major"=>"", "date_type"=>"", "expected_graduation_date"=>""}, "commit"=>"Show All"}
+Controller Search Params: #<ActionController::Parameters {"major"=>"", "expected_graduation_date"=>"", "date_type"=>""} permitted: true>
+show all
+  [1m[36mStudent Load (0.4ms)[0m  [1m[34mSELECT "students".* FROM "students" /* loading for inspect */ LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ app/controllers/students_controller.rb:47:in `index'
+Filtered Students: #<ActiveRecord::Relation [#<Student id: 2, first_name: "First 1", last_name: "Last 1", major: "Computer Engineering BS", expected_graduation_date: "2023-01-27", created_at: "2024-10-28 20:42:09.402718000 +0000", updated_at: "2024-10-28 20:42:09.402718000 +0000", email: "student1@msudenver.edu">, #<Student id: 3, first_name: "First 2", last_name: "Last 2", major: "Computer Information Systems BS", expected_graduation_date: "2023-01-06", created_at: "2024-10-28 20:42:09.996328000 +0000", updated_at: "2024-10-28 20:42:09.996328000 +0000", email: "student2@msudenver.edu">, #<Student id: 4, first_name: "First 3", last_name: "Last 3", major: "Cybersecurity Major", expected_graduation_date: "2024-12-02", created_at: "2024-10-28 20:42:10.371406000 +0000", updated_at: "2024-10-28 20:42:10.371406000 +0000", email: "student3@msudenver.edu">, #<Student id: 5, first_name: "First 4", last_name: "Last 4", major: "Computer Information Systems BS", expected_graduation_date: "2025-12-25", created_at: "2024-10-28 20:42:10.744736000 +0000", updated_at: "2024-10-28 20:42:10.744736000 +0000", email: "student4@msudenver.edu">, #<Student id: 6, first_name: "First 5", last_name: "Last 5", major: "Computer Science BS", expected_graduation_date: "2026-06-24", created_at: "2024-10-28 20:42:11.117764000 +0000", updated_at: "2024-10-28 20:42:11.117764000 +0000", email: "student5@msudenver.edu">, #<Student id: 7, first_name: "First 6", last_name: "Last 6", major: "Data Science and Machine Learning Major", expected_graduation_date: "2023-03-28", created_at: "2024-10-28 20:42:11.490780000 +0000", updated_at: "2024-10-28 20:42:11.490780000 +0000", email: "student6@msudenver.edu">, #<Student id: 8, first_name: "First 7", last_name: "Last 7", major: "Data Science and Machine Learning Major", expected_graduation_date: "2025-01-29", created_at: "2024-10-28 20:42:11.870976000 +0000", updated_at: "2024-10-28 20:42:11.870976000 +0000", email: "student7@msudenver.edu">, #<Student id: 9, first_name: "First 8", last_name: "Last 8", major: "Computer Information Systems BS", expected_graduation_date: "2023-07-30", created_at: "2024-10-28 20:42:12.246054000 +0000", updated_at: "2024-10-28 20:42:12.246054000 +0000", email: "student8@msudenver.edu">, #<Student id: 10, first_name: "First 9", last_name: "Last 9", major: "Computer Science BS", expected_graduation_date: "2023-02-27", created_at: "2024-10-28 20:42:12.620166000 +0000", updated_at: "2024-10-28 20:42:12.620166000 +0000", email: "student9@msudenver.edu">, #<Student id: 11, first_name: "First 10", last_name: "Last 10", major: "Cybersecurity Major", expected_graduation_date: "2023-02-21", created_at: "2024-10-28 20:42:12.993496000 +0000", updated_at: "2024-10-28 20:42:12.993496000 +0000", email: "student10@msudenver.edu">, ...]>
+  Rendering layout layouts/application.html.erb
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/_search_form.html.erb (Duration: 1.7ms | Allocations: 3326)
+  [1m[36mStudent Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "students" LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/views/students/index.html.erb:10
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students"[0m
+  ↳ app/views/students/index.html.erb:23
+  Rendered students/index.html.erb within layouts/application (Duration: 10.2ms | Allocations: 10599)
+  Rendered layout layouts/application.html.erb (Duration: 16.0ms | Allocations: 12766)
+Completed 200 OK in 42ms (Views: 16.3ms | ActiveRecord: 7.9ms | Allocations: 25137)
+
+
+DEPRECATION WARNING: `Rails.application.secrets` is deprecated in favor of `Rails.application.credentials` and will be removed in Rails 7.2. (called from <main> at /workspace/config/environment.rb:5)

@@ -1,0 +1,445 @@
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_attachments"[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_blobs"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_storage_variant_records"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "portfolios"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "portfolios" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preferred_email" varchar, "active" boolean, "summary" text, "skills" text, "student_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_portfolios_on_student_id" ON "portfolios" ("student_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "students"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "students" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "major" varchar, "expected_graduation_date" date, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime(6), "remember_created_at" datetime(6))[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_students_on_email" ON "students" ("email")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_students_on_reset_password_token" ON "students" ("reset_password_token")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aactive_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aactive_storage_attachments_uniqueness" ON "aactive_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_aactive_storage_attachments_on_blob_id" ON "aactive_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aactive_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "active_storage_attachments"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "active_storage_attachments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("id","name","record_type","record_id","blob_id","created_at")
+                     SELECT "id","name","record_type","record_id","blob_id","created_at" FROM "aactive_storage_attachments"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aactive_storage_attachments"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.3ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aactive_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "tindex_aactive_storage_variant_records_uniqueness" ON "aactive_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aactive_storage_variant_records" ("id","blob_id","variation_digest")
+                     SELECT "id","blob_id","variation_digest" FROM "active_storage_variant_records"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "active_storage_variant_records"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("id","blob_id","variation_digest")
+                     SELECT "id","blob_id","variation_digest" FROM "aactive_storage_variant_records"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aactive_storage_variant_records"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aportfolios" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preferred_email" varchar DEFAULT NULL, "active" boolean DEFAULT NULL, "summary" text DEFAULT NULL, "skills" text DEFAULT NULL, "student_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aportfolios_on_student_id" ON "aportfolios" ("student_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aportfolios" ("id","preferred_email","active","summary","skills","student_id","created_at","updated_at")
+                     SELECT "id","preferred_email","active","summary","skills","student_id","created_at","updated_at" FROM "portfolios"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "portfolios"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "portfolios" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "preferred_email" varchar DEFAULT NULL, "active" boolean DEFAULT NULL, "summary" text DEFAULT NULL, "skills" text DEFAULT NULL, "student_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_7c15c3b1d7"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+ ON DELETE CASCADE)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_portfolios_on_student_id" ON "portfolios" ("student_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "portfolios" ("id","preferred_email","active","summary","skills","student_id","created_at","updated_at")
+                     SELECT "id","preferred_email","active","summary","skills","student_id","created_at","updated_at" FROM "aportfolios"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aportfolios"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20241025214145)[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20241020221403),
+(20241017020608),
+(20241017015237),
+(20240917004753),
+(20240915233724),
+(20240915233532);[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2024-10-28 20:45:50.971580', '2024-10-28 20:45:50.971584') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '936ef98551a64af7a487a14b3baeb2e6956768d3', '2024-10-28 20:45:50.973263', '2024-10-28 20:45:50.973265') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/portfolios/new" for 127.0.0.1 at 2024-10-28 20:45:51 +0000
+Processing by PortfoliosController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering portfolios/new.html.erb within layouts/application
+  Rendered portfolios/_form.html.erb (Duration: 1.6ms | Allocations: 976)
+  Rendered portfolios/new.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1364)
+  Rendered layout layouts/application.html.erb (Duration: 3.1ms | Allocations: 1445)
+Completed 500 Internal Server Error in 297ms (ActiveRecord: 0.4ms | Allocations: 294434)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "portfolios"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "portfolios"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/students" for 127.0.0.1 at 2024-10-28 20:45:51 +0000
+Processing by StudentsController#index as HTML
+Controller Search Params: #<ActionController::Parameters {} permitted: true>
+All search parameters are empty
+Filtered Students: #<ActiveRecord::Relation []>
+  Rendering layout layouts/application.html.erb
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/_search_form.html.erb (Duration: 4.2ms | Allocations: 1684)
+  Rendered students/index.html.erb within layouts/application (Duration: 8.5ms | Allocations: 2465)
+  Rendered layout layouts/application.html.erb (Duration: 369.9ms | Allocations: 81625)
+Completed 200 OK in 373ms (Views: 370.8ms | ActiveRecord: 0.0ms | Allocations: 82495)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started POST "/students" for 127.0.0.1 at 2024-10-28 20:45:51 +0000
+Processing by Students::RegistrationsController#create as HTML
+  Parameters: {"student"=>{"first_name"=>"Aaron", "last_name"=>"Gordon", "school_email"=>"gordon@msudenver.edu", "major"=>"Computer Science BS", "expected_graduation_date"=>"2025-05-15"}}
+[31mUnpermitted parameter: :school_email. Context: { controller: Students::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x0000ffffa3bf2130>, params: {"student"=>{"first_name"=>"Aaron", "last_name"=>"Gordon", "school_email"=>"gordon@msudenver.edu", "major"=>"Computer Science BS", "expected_graduation_date"=>"2025-05-15"}, "controller"=>"students/registrations", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering students/registrations/new.html.erb within layouts/application
+  Rendered students/shared/_error_messages.html.erb (Duration: 1.3ms | Allocations: 1381)
+  Rendered students/shared/_links.html.erb (Duration: 0.7ms | Allocations: 528)
+  Rendered students/registrations/new.html.erb within layouts/application (Duration: 9.1ms | Allocations: 6274)
+  Rendered layout layouts/application.html.erb (Duration: 10.0ms | Allocations: 7572)
+Completed 422 Unprocessable Content in 20ms (Views: 11.5ms | ActiveRecord: 0.4ms | Allocations: 13303)
+  [1m[36mStudent Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started POST "/students" for 127.0.0.1 at 2024-10-28 20:45:51 +0000
+Processing by Students::RegistrationsController#create as HTML
+  Parameters: {"student"=>{"first_name"=>"Aaron", "last_name"=>"Gordon", "school_email"=>"gordon@msudenver.edu", "major"=>"Computer Science BS", "expected_graduation_date"=>"2025-05-15"}}
+[31mUnpermitted parameter: :school_email. Context: { controller: Students::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x0000ffffa8c36100>, params: {"student"=>{"first_name"=>"Aaron", "last_name"=>"Gordon", "school_email"=>"gordon@msudenver.edu", "major"=>"Computer Science BS", "expected_graduation_date"=>"2025-05-15"}, "controller"=>"students/registrations", "action"=>"create"} }[0m
+  Rendering layout layouts/application.html.erb
+  Rendering students/registrations/new.html.erb within layouts/application
+  Rendered students/shared/_error_messages.html.erb (Duration: 0.5ms | Allocations: 729)
+  Rendered students/shared/_links.html.erb (Duration: 0.1ms | Allocations: 70)
+  Rendered students/registrations/new.html.erb within layouts/application (Duration: 2.9ms | Allocations: 3390)
+  Rendered layout layouts/application.html.erb (Duration: 3.9ms | Allocations: 4608)
+Completed 422 Unprocessable Content in 6ms (Views: 4.4ms | ActiveRecord: 0.0ms | Allocations: 5654)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started POST "/students" for 127.0.0.1 at 2024-10-28 20:45:51 +0000
+Processing by Students::RegistrationsController#create as HTML
+  Parameters: {"student"=>{"first_name"=>"", "last_name"=>"", "school_email"=>""}}
+[31mUnpermitted parameter: :school_email. Context: { controller: Students::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x0000ffffaa1a5a18>, params: {"student"=>{"first_name"=>"", "last_name"=>"", "school_email"=>""}, "controller"=>"students/registrations", "action"=>"create"} }[0m
+  Rendering layout layouts/application.html.erb
+  Rendering students/registrations/new.html.erb within layouts/application
+  Rendered students/shared/_error_messages.html.erb (Duration: 1.0ms | Allocations: 1903)
+  Rendered students/shared/_links.html.erb (Duration: 0.1ms | Allocations: 70)
+  Rendered students/registrations/new.html.erb within layouts/application (Duration: 4.1ms | Allocations: 6189)
+  Rendered layout layouts/application.html.erb (Duration: 5.0ms | Allocations: 7407)
+Completed 422 Unprocessable Content in 7ms (Views: 5.4ms | ActiveRecord: 0.0ms | Allocations: 8474)
+  [1m[36mStudent Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/students/9999" for 127.0.0.1 at 2024-10-28 20:45:51 +0000
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"9999"}
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 9999], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1088)
+  
+ActiveRecord::RecordNotFound (Couldn't find Student with 'id'=9999):
+  
+app/controllers/students_controller.rb:109:in `set_student'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  Rendering portfolios/new.html.erb
+  Rendered portfolios/_form.html.erb (Duration: 0.1ms | Allocations: 115)
+  Rendered portfolios/new.html.erb (Duration: 1.0ms | Allocations: 375)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/portfolios/new" for 127.0.0.1 at 2024-10-28 21:24:34 +0000
+Processing by PortfoliosController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering portfolios/new.html.erb within layouts/application
+  Rendered portfolios/_form.html.erb (Duration: 1.6ms | Allocations: 976)
+  Rendered portfolios/new.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1364)
+  Rendered layout layouts/application.html.erb (Duration: 3.0ms | Allocations: 1445)
+Completed 500 Internal Server Error in 281ms (ActiveRecord: 0.4ms | Allocations: 294397)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "portfolios"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPortfolio Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "portfolios"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/students" for 127.0.0.1 at 2024-10-28 21:24:35 +0000
+Processing by StudentsController#index as HTML
+Controller Search Params: #<ActionController::Parameters {} permitted: true>
+All search parameters are empty
+Filtered Students: #<ActiveRecord::Relation []>
+  Rendering layout layouts/application.html.erb
+  Rendering students/index.html.erb within layouts/application
+  Rendered students/_search_form.html.erb (Duration: 4.2ms | Allocations: 1682)
+  Rendered students/index.html.erb within layouts/application (Duration: 8.6ms | Allocations: 2463)
+  Rendered layout layouts/application.html.erb (Duration: 78.3ms | Allocations: 22883)
+Completed 200 OK in 82ms (Views: 79.1ms | ActiveRecord: 0.0ms | Allocations: 23753)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started POST "/students" for 127.0.0.1 at 2024-10-28 21:24:35 +0000
+Processing by Students::RegistrationsController#create as HTML
+  Parameters: {"student"=>{"first_name"=>"Aaron", "last_name"=>"Gordon", "school_email"=>"gordon@msudenver.edu", "major"=>"Computer Science BS", "expected_graduation_date"=>"2025-05-15"}}
+[31mUnpermitted parameter: :school_email. Context: { controller: Students::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x0000ffff9c3d2268>, params: {"student"=>{"first_name"=>"Aaron", "last_name"=>"Gordon", "school_email"=>"gordon@msudenver.edu", "major"=>"Computer Science BS", "expected_graduation_date"=>"2025-05-15"}, "controller"=>"students/registrations", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TO SAVEPOINT active_record_1[0m
+  Rendering layout layouts/application.html.erb
+  Rendering students/registrations/new.html.erb within layouts/application
+  Rendered students/shared/_error_messages.html.erb (Duration: 1.4ms | Allocations: 1381)
+  Rendered students/shared/_links.html.erb (Duration: 0.7ms | Allocations: 523)
+  Rendered students/registrations/new.html.erb within layouts/application (Duration: 9.3ms | Allocations: 6267)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | Allocations: 7564)
+Completed 422 Unprocessable Content in 21ms (Views: 12.0ms | ActiveRecord: 0.4ms | Allocations: 13243)
+  [1m[36mStudent Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started POST "/students" for 127.0.0.1 at 2024-10-28 21:24:35 +0000
+Processing by Students::RegistrationsController#create as HTML
+  Parameters: {"student"=>{"first_name"=>"Aaron", "last_name"=>"Gordon", "school_email"=>"gordon@msudenver.edu", "major"=>"Computer Science BS", "expected_graduation_date"=>"2025-05-15"}}
+[31mUnpermitted parameter: :school_email. Context: { controller: Students::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x0000ffff9c2bd030>, params: {"student"=>{"first_name"=>"Aaron", "last_name"=>"Gordon", "school_email"=>"gordon@msudenver.edu", "major"=>"Computer Science BS", "expected_graduation_date"=>"2025-05-15"}, "controller"=>"students/registrations", "action"=>"create"} }[0m
+  Rendering layout layouts/application.html.erb
+  Rendering students/registrations/new.html.erb within layouts/application
+  Rendered students/shared/_error_messages.html.erb (Duration: 0.6ms | Allocations: 729)
+  Rendered students/shared/_links.html.erb (Duration: 0.1ms | Allocations: 70)
+  Rendered students/registrations/new.html.erb within layouts/application (Duration: 3.9ms | Allocations: 3390)
+  Rendered layout layouts/application.html.erb (Duration: 4.8ms | Allocations: 4608)
+Completed 422 Unprocessable Content in 6ms (Views: 5.1ms | ActiveRecord: 0.0ms | Allocations: 5654)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mStudent Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+Started POST "/students" for 127.0.0.1 at 2024-10-28 21:24:35 +0000
+Processing by Students::RegistrationsController#create as HTML
+  Parameters: {"student"=>{"first_name"=>"", "last_name"=>"", "school_email"=>""}}
+[31mUnpermitted parameter: :school_email. Context: { controller: Students::RegistrationsController, action: create, request: #<ActionDispatch::Request:0x0000ffff9c25b740>, params: {"student"=>{"first_name"=>"", "last_name"=>"", "school_email"=>""}, "controller"=>"students/registrations", "action"=>"create"} }[0m
+  Rendering layout layouts/application.html.erb
+  Rendering students/registrations/new.html.erb within layouts/application
+  Rendered students/shared/_error_messages.html.erb (Duration: 1.2ms | Allocations: 1903)
+  Rendered students/shared/_links.html.erb (Duration: 0.1ms | Allocations: 70)
+  Rendered students/registrations/new.html.erb within layouts/application (Duration: 4.4ms | Allocations: 6189)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | Allocations: 7407)
+Completed 422 Unprocessable Content in 7ms (Views: 5.8ms | ActiveRecord: 0.0ms | Allocations: 8474)
+  [1m[36mStudent Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "students"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/students/9999" for 127.0.0.1 at 2024-10-28 21:24:35 +0000
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"9999"}
+  [1m[36mStudent Load (0.2ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 9999], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (ActiveRecord: 0.2ms | Allocations: 996)
+  
+ActiveRecord::RecordNotFound (Couldn't find Student with 'id'=9999):
+  
+app/controllers/students_controller.rb:109:in `set_student'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  Rendering portfolios/new.html.erb
+  Rendered portfolios/_form.html.erb (Duration: 0.1ms | Allocations: 115)
+  Rendered portfolios/new.html.erb (Duration: 1.0ms | Allocations: 375)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/students/sign_up" for 127.0.0.1 at 2024-10-28 21:36:24 +0000
+Processing by Students::RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering students/registrations/new.html.erb within layouts/application
+  Rendered students/shared/_error_messages.html.erb (Duration: 0.4ms | Allocations: 237)
+  Rendered students/shared/_links.html.erb (Duration: 0.7ms | Allocations: 528)
+  Rendered students/registrations/new.html.erb within layouts/application (Duration: 11.4ms | Allocations: 5449)
+  Rendered layout layouts/application.html.erb (Duration: 86.2ms | Allocations: 25799)
+Completed 200 OK in 334ms (Views: 315.5ms | ActiveRecord: 0.7ms | Allocations: 321075)
+Started GET "/assets/application-7d8af397d3e6cb4b1c891871fce2977f0501a10aa5e448d3a5bb6083cc44d995.css" for 127.0.0.1 at 2024-10-28 21:36:24 +0000
+Started GET "/assets/application-39e91a815b1b0af6dd4903c646e030f93bfb636ece047f3398727ffc8f977e49.js" for 127.0.0.1 at 2024-10-28 21:36:24 +0000
+Started GET "/assets/msudenver-bbd4fb2b1a1df6cb4fee5bd5e83ab76ebaed4d51ff14a64f1671e6de45850642.svg" for 127.0.0.1 at 2024-10-28 21:36:24 +0000
+Started POST "/students" for 127.0.0.1 at 2024-10-28 21:36:25 +0000
+Processing by Students::RegistrationsController#create as HTML
+  Parameters: {"student"=>{"first_name"=>"Capybara", "last_name"=>"Rspec", "major"=>"Computer Science BS", "expected_graduation_date"=>"50510-02-02", "email"=>"cr@msudenver.edu", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "students" WHERE "students"."email" = ? LIMIT ?[0m  [["email", "cr@msudenver.edu"], ["LIMIT", 1]]
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("first_name", "last_name", "major", "expected_graduation_date", "created_at", "updated_at", "email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["first_name", "Capybara"], ["last_name", "Rspec"], ["major", "Computer Science BS"], ["expected_graduation_date", "50510-02-02"], ["created_at", "2024-10-28 21:36:25.715574"], ["updated_at", "2024-10-28 21:36:25.715574"], ["email", "cr@msudenver.edu"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil]]
+  [1m[36mPortfolio Create (0.1ms)[0m  [1m[32mINSERT INTO "portfolios" ("preferred_email", "active", "summary", "skills", "student_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["preferred_email", nil], ["active", 0], ["summary", nil], ["skills", nil], ["student_id", 1], ["created_at", "2024-10-28 21:36:25.724591"], ["updated_at", "2024-10-28 21:36:25.724591"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:42549/students/1
+Completed 303 See Other in 30ms (ActiveRecord: 0.9ms | Allocations: 15447)
+Started GET "/students/1" for 127.0.0.1 at 2024-10-28 21:36:25 +0000
+Processing by StudentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Students: nil
+  [1m[36mCACHE Student Load (0.0ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering students/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "Student"], ["name", "profile_picture"], ["LIMIT", 1]]
+  [1m[36mPortfolio Load (0.1ms)[0m  [1m[34mSELECT "portfolios".* FROM "portfolios" WHERE "portfolios"."student_id" = ? LIMIT ?[0m  [["student_id", 1], ["LIMIT", 1]]
+  Rendered students/_student.html.erb (Duration: 5.6ms | Allocations: 2914)
+  Rendered students/show.html.erb within layouts/application (Duration: 11.0ms | Allocations: 4840)
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."id" = ? ORDER BY "students"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | Allocations: 6585)
+Completed 200 OK in 17ms (Views: 13.6ms | ActiveRecord: 0.4ms | Allocations: 7942)
+Started GET "/assets/default-profile-picture-6acd08a50ab644ffa60f4dd2d52462edb1f50ee3810318e30d353f8f30456da9.jpg" for 127.0.0.1 at 2024-10-28 21:36:25 +0000
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
